@@ -12,5 +12,10 @@ export class CourseService {
   }
 
 
+  createCourse():string{
+    return "Create Course - from Service";
+  }
+
+
 
 }
