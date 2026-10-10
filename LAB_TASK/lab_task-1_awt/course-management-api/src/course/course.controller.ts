@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Controller, Get, Param, Patch, Post, Put } from '@nestjs/common';
 import { CourseService } from './course.service.js';
 
 @Controller('course')
@@ -30,6 +30,14 @@ export class CourseController {
     return this.courseSrvc.updateCourse(id);
   }
 
-  
+
+  @Patch(":id")
+  partialUpdate(@Param("id") id: string):string{
+    return this.courseSrvc.partialUpdate(id);
+  }
+
+
+
+
 
 }
