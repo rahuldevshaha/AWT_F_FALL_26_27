@@ -17,5 +17,9 @@ export class CourseService {
   }
 
 
+  updateCourse(id: string):string {
+    return `Update Course with ID: ${id} - from Service`
+  }
+
 
 }
