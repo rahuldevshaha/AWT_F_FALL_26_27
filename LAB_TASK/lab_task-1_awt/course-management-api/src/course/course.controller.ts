@@ -32,8 +32,8 @@ export class CourseController {
 
 
   @Patch(":id")
-  partialUpdate(@Param("id") id: string):string{
-    return this.courseSrvc.partialUpdate(id);
+  patchUCourse(@Param("id") id: string):string{
+    return this.courseSrvc.patchUCourse(id);
   }
 
 
@@ -45,6 +45,6 @@ export class CourseController {
 
 
 
-  
+
 
 }

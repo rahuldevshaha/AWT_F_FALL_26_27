@@ -22,7 +22,7 @@ export class CourseService {
   }
 
 
-  partialUpdate(id: string):string{
+  patchUCourse(id: string):string{
     return `Partial Update(PATCH) Course with ID: ${id} - from Service`
   }
 
