@@ -7,6 +7,10 @@ export class CourseService {
     return "Get All Courses - from Service"
   }
 
+  getCourseById(id: string):string{
+    return `Get Course with ID: ${id} - from Service`
+  }
+
 
 
 }
