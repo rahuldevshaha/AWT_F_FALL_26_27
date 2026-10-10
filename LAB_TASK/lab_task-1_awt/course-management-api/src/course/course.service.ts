@@ -26,5 +26,10 @@ export class CourseService {
     return `Partial Update(PATCH) Course with ID: ${id} - from Service`
   }
 
+  deleteCourse(id : string): string{
+    return `Delete Course with ID: ${id} - from Service`;
+  }
+
+
 
 }

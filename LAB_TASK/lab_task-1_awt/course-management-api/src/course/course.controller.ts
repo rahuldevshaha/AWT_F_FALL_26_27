@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Patch, Post, Put } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
 import { CourseService } from './course.service.js';
 
 @Controller('course')
@@ -37,7 +37,14 @@ export class CourseController {
   }
 
 
+  @Delete(":id")
+  deleteCourse(@Param("id") id: string):string{
+    return this.courseSrvc.deleteCourse(id);
+  }
 
 
+
+
+  
 
 }
