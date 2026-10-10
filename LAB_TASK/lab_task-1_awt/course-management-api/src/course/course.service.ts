@@ -18,16 +18,17 @@ export class CourseService {
 
 
   updateCourse(id: string):string {
-    return `Update Course with ID: ${id} - from Service`
+    return `Update Course ${id} - from Service`
   }
 
 
   patchUCourse(id: string):string{
-    return `Partial Update(PATCH) Course with ID: ${id} - from Service`
+    return `Patch Course ${id} - from Service`
   }
 
+
   deleteCourse(id : string): string{
-    return `Delete Course with ID: ${id} - from Service`;
+    return `Delete Course ${id} - from Service`;
   }
 
 
