@@ -66,7 +66,7 @@ export class CourseController {
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
-        destination: './uploads',
+        destination: './src/uploads',
         filename: (req, file, cb) => {
           cb(null, Date.now() + '-' + file.originalname);
         },
