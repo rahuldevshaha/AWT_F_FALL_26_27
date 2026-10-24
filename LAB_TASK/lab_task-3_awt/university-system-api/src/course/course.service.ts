@@ -4,16 +4,19 @@ import { Injectable } from '@nestjs/common';
 export class CourseService {
 
 
+
+
   getAllCourses() {
-    return { message: 'All courses fetched', data: [] };
+    return { message: 'All courses Fetched', data: [] };
   }
 
+
   getCourseById(id: string) {
-    return { message: 'Course fetched', id };
+    return { message: 'Course Fetched', id };
   }
 
   createCourse(name: string, code: string) {
-    return { message: 'Course created', data: { name, code } };
+    return { message: 'Course Created', data: { name, code } };
   }
 
 
