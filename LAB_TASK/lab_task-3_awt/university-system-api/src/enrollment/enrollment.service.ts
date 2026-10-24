@@ -29,6 +29,11 @@ export class EnrollmentService {
   }
 
 
+  getEnrollments():any{
+    return { message: 'All ENROLLMENT Fetched', data: []}
+  }
+
+
 
 
 }
