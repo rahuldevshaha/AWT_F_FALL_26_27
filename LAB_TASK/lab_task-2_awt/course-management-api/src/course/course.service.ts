@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { CreateCourseDto } from './dto/create-course.dto.js';
 
 @Injectable()
 export class CourseService {
@@ -14,8 +15,8 @@ export class CourseService {
   }
 
 
-  createCourse():string{
-    return "Create Course - from Service";
+  createCourse(course: CreateCourseDto): any {
+    return { message: 'Course created successfully', data: course };
   }
 
 
