@@ -36,8 +36,8 @@ export class CourseController {
 
 
   @Patch(":id")
-  patchUCourse(@Param("id") id: string):string{
-    return this.courseSrvc.patchUCourse(id);
+  patchUCourse(@Param("id") id: string, course: UpdateCourseDto):string{
+    return this.courseSrvc.patchUCourse(id, course);
   }
 
 

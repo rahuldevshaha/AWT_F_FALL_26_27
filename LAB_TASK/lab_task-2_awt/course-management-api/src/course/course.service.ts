@@ -26,8 +26,12 @@ export class CourseService {
   }
 
 
-  patchUCourse(id: string):string{
-    return `Patch Course ${id} - from Service`
+  patchUCourse(id: string, course: UpdateCourseDto):any{
+    return {
+      message: 'Course patched successfully',
+      id,
+      updatedFields: Object.keys(course),
+    };
   }
 
 
