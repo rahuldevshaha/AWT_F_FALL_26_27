@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
 import { CourseService } from './course.service.js';
 import { CreateCourseDto } from './dto/create-course.dto.js';
+import { UpdateCourseDto } from './dto/update-course.dto.js';
 
 @Controller('course')
 export class CourseController {
@@ -29,8 +30,8 @@ export class CourseController {
 
 
   @Put(":id")
-  updateCourse(@Param("id") id: string):string {
-    return this.courseSrvc.updateCourse(id);
+  updateCourse(@Param("id") id: string, @Body() course: UpdateCourseDto):string {
+    return this.courseSrvc.updateCourse(id, course);
   }
 
 

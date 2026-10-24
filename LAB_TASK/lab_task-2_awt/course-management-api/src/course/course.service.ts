@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCourseDto } from './dto/create-course.dto.js';
+import { UpdateCourseDto } from './dto/update-course.dto.js';
 
 @Injectable()
 export class CourseService {
@@ -20,8 +21,8 @@ export class CourseService {
   }
 
 
-  updateCourse(id: string):string {
-    return `Update Course ${id} - from Service`
+  updateCourse(id: string, course: UpdateCourseDto ):any {
+    return { message: 'Course updated successfully', id, data: course };
   }
 
 
