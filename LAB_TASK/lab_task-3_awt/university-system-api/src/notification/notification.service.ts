@@ -5,6 +5,8 @@ import { EnrollmentService } from '../enrollment/enrollment.service.js';
 export class NotificationService {
 
   constructor(
+    @Inject(forwardRef(()=> EnrollmentService))
+    private readonly enrollmentService: EnrollmentService
 
     ){}
 
@@ -17,6 +19,16 @@ export class NotificationService {
     }
   }
 
+
+  checkEnrollmentAndNotify(stuName: string, courseID: string): any{
+    const enrollments = this.enrollmentService.getEnrollments();
+    return {
+      message: 'Enrollment checked',
+      student: stuName,
+      courseID,
+      enrollments,
+    }
+  }
 
 
 
