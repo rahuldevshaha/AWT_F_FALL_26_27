@@ -5,9 +5,9 @@ import { EnrollmentService } from '../enrollment/enrollment.service.js';
 export class NotificationService {
 
   constructor(
-    @Inject(forwardRef(()=> EnrollmentService))
-    private readonly enrollmentService: EnrollmentService
 
+    @Inject(forwardRef(()=> EnrollmentService))
+    private enrollmentService: any,
     ){}
 
 

@@ -9,7 +9,7 @@ export class EnrollmentService {
 
     private courseService : CourseService,
     @Inject(forwardRef(()=> NotificationService))
-    private notificationService: NotificationService
+    private notificationService: any
 
   ){
   }
