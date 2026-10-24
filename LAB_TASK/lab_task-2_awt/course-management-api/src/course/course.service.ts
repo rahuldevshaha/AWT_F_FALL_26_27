@@ -7,12 +7,12 @@ export class CourseService {
 
 
 
-  getAllCourses():string{
-    return "Get All Courses - from Service"
+  getAllCourses(): any{
+    return { message: 'All courses Fetched Successfully', data: [] };
   }
 
-  getCourseById(id: string):string{
-    return `Get Course with ID: ${id} - from Service`
+  getCourseById(id: string):any{
+    return { message: 'Course fetched successfully', id };
   }
 
 
@@ -35,8 +35,8 @@ export class CourseService {
   }
 
 
-  deleteCourse(id : string): string{
-    return `Delete Course ${id} - from Service`;
+  deleteCourse(id : string): any{
+    return { message: 'Course deleted successfully', id };
   }
 
   

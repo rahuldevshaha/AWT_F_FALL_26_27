@@ -11,6 +11,7 @@ export class CourseController {
 
   }
 
+
   @Get()
   getAllCourses():string{
     return this.courseSrvc.getAllCourses();
