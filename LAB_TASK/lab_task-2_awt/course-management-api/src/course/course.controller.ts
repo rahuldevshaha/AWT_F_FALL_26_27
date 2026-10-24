@@ -1,7 +1,20 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Put, UploadedFile, UseInterceptors,
+} from '@nestjs/common';
 import { CourseService } from './course.service.js';
 import { CreateCourseDto } from './dto/create-course.dto.js';
 import { UpdateCourseDto } from './dto/update-course.dto.js';
+import { diskStorage } from 'multer';
+import { FileInterceptor } from '@nestjs/platform-express';
+
 
 @Controller('course')
 export class CourseController {
@@ -37,7 +50,7 @@ export class CourseController {
 
 
   @Patch(":id")
-  patchUCourse(@Param("id") id: string, course: UpdateCourseDto):string{
+  patchUCourse(@Param("id") id: string, @Body() course: UpdateCourseDto):string{
     return this.courseSrvc.patchUCourse(id, course);
   }
 
@@ -49,6 +62,39 @@ export class CourseController {
 
 
 
+  @Post(':id/upload')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (req, file, cb) => {
+          cb(null, Date.now() + '-' + file.originalname);
+        },
+      }),
+      fileFilter: (req, file, cb) => {
+        if (file.originalname.match(/\.(jpg|jpeg|png|pdf)$/i)) {
+          cb(null, true);
+        } else {
+          cb(
+            new BadRequestException('Only jpg, jpeg, png, pdf files allowed'),
+            false,
+          );
+        }
+      },
+      limits: { fileSize: 2 * 1024 * 1024 },
+    }),
+  )
+
+
+  uploadCourseMaterial(
+    @Param('id') id: string,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    if (!file) {
+      throw new BadRequestException('File is required');
+    }
+    return this.courseSrvc.uploadCourseMaterial(id, file);
+  }
 
 
 
