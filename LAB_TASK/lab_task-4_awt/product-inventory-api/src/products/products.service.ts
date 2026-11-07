@@ -149,6 +149,16 @@ export class ProductsService {
 
 
 
+  async findByCategory(category: string):Promise<ApiResponse<Products[]>> {
+    const products = await this.productsRepo.find({
+      where: { category },
+    });
+
+    return {
+      message: `${products.length} Products Found by Category`,
+      data: products,
+    };
+  }
 
 
 

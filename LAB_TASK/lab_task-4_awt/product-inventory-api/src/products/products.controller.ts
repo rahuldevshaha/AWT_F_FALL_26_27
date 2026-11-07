@@ -77,4 +77,14 @@ export class ProductsController {
 
 
 
+  @Get('category/:cat')
+  findByCategory(@Param('cat') category: string):Promise<ApiResponse<Products[]>> {
+    return this.productsService.findByCategory(category);
+  }
+
+
+
+
+
+
 }
