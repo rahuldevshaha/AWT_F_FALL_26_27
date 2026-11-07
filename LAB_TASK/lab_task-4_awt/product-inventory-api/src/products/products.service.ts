@@ -163,4 +163,36 @@ export class ProductsService {
 
 
 
+
+
+
+
+
+
+  async toggleActive(id: number):Promise<ApiResponse<Products>> {
+    const product = await this.productsRepo.findOne({
+      where: { id },
+    });
+
+    if (!product) {
+      throw new NotFoundException(`Product with id ${id} not Found`);
+    }
+
+    product.isActive = !product.isActive;
+
+    const updatedProduct = await this.productsRepo.save(product);
+
+    return {
+      message: 'Product status updated successfully',
+      data: updatedProduct,
+    };
+  }
+
+
+
+
+
+
+
+
 }

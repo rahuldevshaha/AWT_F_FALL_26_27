@@ -82,7 +82,10 @@ export class ProductsController {
     return this.productsService.findByCategory(category);
   }
 
-
+  @Patch(':id/toggle')
+  toggleActive(@Param('id', ParseIntPipe) id: number):Promise<ApiResponse<Products>> {
+    return this.productsService.toggleActive(id);
+  }
 
 
 
