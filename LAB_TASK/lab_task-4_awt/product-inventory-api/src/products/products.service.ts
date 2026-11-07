@@ -86,5 +86,31 @@ export class ProductsService {
 
 
 
+  async replace(id: number, dto: UpdateProductDto):Promise<ApiResponse<Products>> {
+    const product = await this.productsRepo.findOne({
+      where: { id },
+    });
+
+    if (!product) {
+      throw new NotFoundException(`Product with id ${id} not found`);
+    }
+
+    Object.assign(product, dto);
+
+    const replacedProduct = await this.productsRepo.save(product);
+
+    return {
+      message: 'Product replaced successfully',
+      data: replacedProduct,
+    };
+  }
+
+
+
+
+
+
+
+
 
 }
