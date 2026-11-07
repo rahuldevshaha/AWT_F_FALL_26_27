@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Products } from './entities/products.entity.js';
 import { Repository } from 'typeorm';
@@ -34,6 +34,7 @@ export class ProductsService {
   }
 
 
+
   async findAll():Promise<ApiResponse<Products[]>> {
     const products = await this.productsRepo.find({
       order: { createdAt: 'DESC' },
@@ -42,6 +43,22 @@ export class ProductsService {
     return {
       message: 'Products retrieved successfully',
       data: products,
+    };
+  }
+
+
+  async findOne(id: number):Promise<ApiResponse<Products>> {
+    const product = await this.productsRepo.findOne({
+      where: { id },
+    });
+
+    if (!product) {
+      throw new NotFoundException(`Product with id ${id} not found`);
+    }
+
+    return {
+      message: 'Product retrieved successfully',
+      data: product,
     };
   }
 
