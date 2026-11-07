@@ -9,7 +9,7 @@ import { PartialUpdateProductDto } from './dtos/partial-update-product.dto.js';
 
 type ApiResponse<T> = {
   message: string;
-  data: T;
+  data?: T;
 };
 
 
@@ -108,7 +108,21 @@ export class ProductsService {
 
 
 
+  async remove(id: number):Promise<ApiResponse<Products>> {
+    const product = await this.productsRepo.findOne({
+      where: { id },
+    });
 
+    if (!product) {
+      throw new NotFoundException(`Product with id ${id} not found`);
+    }
+
+    await this.productsRepo.remove(product);
+
+    return {
+      message: `Product deleted successfully For ID ${id}`
+    };
+  }
 
 
 

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Put } from '@nestjs/common';
 import { ProductsService } from './products.service.js';
 import { CreateProductDto } from './dtos/create-product.dto.js';
 import { Products } from './entities/products.entity.js';
@@ -9,7 +9,7 @@ import { PartialUpdateProductDto } from './dtos/partial-update-product.dto.js';
 
 type ApiResponse<T> = {
   message: string;
-  data: T;
+  data?: T;
 };
 
 
@@ -55,6 +55,12 @@ export class ProductsController {
     @Body() dto: UpdateProductDto,
   ):Promise<ApiResponse<Products>> {
     return this.productsService.replace(id, dto);
+  }
+
+
+  @Delete(':id')
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.productsService.remove(id);
   }
 
 
