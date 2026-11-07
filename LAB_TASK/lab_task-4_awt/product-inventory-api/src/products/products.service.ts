@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Products } from './entities/products.entity.js';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { CreateProductDto } from './dtos/create-product.dto.js';
 import { UpdateProductDto } from './dtos/update-product.dto.js';
 import { PartialUpdateProductDto } from './dtos/partial-update-product.dto.js';
@@ -21,6 +21,26 @@ export class ProductsService {
     @InjectRepository(Products)
     private productsRepo: Repository<Products>,
   ) {}
+
+
+
+
+
+
+  async search(keyword: string):Promise<ApiResponse<Products[]>> {
+    const products = await this.productsRepo.find({
+      where: {
+        name: ILike(`%${keyword}%`),
+      },
+    });
+
+    return {
+      message: `${products.length} Products Found!`,
+      data: products,
+    };
+  }
+
+
 
 
 
@@ -123,6 +143,12 @@ export class ProductsService {
       message: `Product deleted successfully For ID ${id}`
     };
   }
+
+
+
+
+
+
 
 
 

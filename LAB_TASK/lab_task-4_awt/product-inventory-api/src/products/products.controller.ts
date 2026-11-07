@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Put, Query } from '@nestjs/common';
 import { ProductsService } from './products.service.js';
 import { CreateProductDto } from './dtos/create-product.dto.js';
 import { Products } from './entities/products.entity.js';
@@ -20,6 +20,12 @@ export class ProductsController {
 
 
 
+  @Get('search')
+  search(@Query('keyword') keyword: string) :Promise<ApiResponse<Products[]>>{
+    return this.productsService.search(keyword);
+  }
+
+
   @Post()
   create(@Body() dto: CreateProductDto):Promise<ApiResponse<Products>> {
     return this.productsService.create(dto);
@@ -36,6 +42,8 @@ export class ProductsController {
   findOne(@Param('id', ParseIntPipe) id: number):Promise<ApiResponse<Products>> {
     return this.productsService.findOne(id);
   }
+
+
 
 
 
@@ -62,6 +70,8 @@ export class ProductsController {
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.productsService.remove(id);
   }
+
+
 
 
 
