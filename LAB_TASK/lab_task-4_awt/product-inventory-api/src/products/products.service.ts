@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Products } from './entities/products.entity.js';
 import { Repository } from 'typeorm';
 import { CreateProductDto } from './dtos/create-product.dto.js';
+import { UpdateProductDto } from './dtos/update-product.dto.js';
+import { PartialUpdateProductDto } from './dtos/partial-update-product.dto.js';
 
 
 type ApiResponse<T> = {
@@ -63,6 +65,24 @@ export class ProductsService {
   }
 
 
+  async update(id: number, dto: PartialUpdateProductDto):Promise<ApiResponse<Products>> {
+    const product = await this.productsRepo.findOne({
+      where: { id },
+    });
+
+    if (!product) {
+      throw new NotFoundException(`Product with id ${id} not found`);
+    }
+
+    Object.assign(product, dto);
+
+    const updatedProduct = await this.productsRepo.save(product);
+
+    return {
+      message: 'Product updated successfully',
+      data: updatedProduct,
+    };
+  }
 
 
 
